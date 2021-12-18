@@ -157,6 +157,15 @@ export class Logger {
     return this._log(LogLevels.INFO, msg, ...args);
   }
 
+  ok<T>(msg: () => T, ...args: unknown[]): T | undefined;
+  ok<T>(msg: T extends GenericFunction ? never : T, ...args: unknown[]): T;
+  ok<T>(
+    msg: (T extends GenericFunction ? never : T) | (() => T),
+    ...args: unknown[]
+  ): T | undefined {
+    return this._log(LogLevels.OK, msg, ...args);
+  }
+
   warning<T>(msg: () => T, ...args: unknown[]): T | undefined;
   warning<T>(msg: T extends GenericFunction ? never : T, ...args: unknown[]): T;
   warning<T>(

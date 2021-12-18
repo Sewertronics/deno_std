@@ -5,6 +5,7 @@ export enum LogLevels {
   NOTSET = 0,
   DEBUG = 10,
   INFO = 20,
+  OK = 25,
   WARNING = 30,
   ERROR = 40,
   CRITICAL = 50,
@@ -22,6 +23,7 @@ const byLevel: Record<string, LevelName> = {
   [String(LogLevels.NOTSET)]: "NOTSET",
   [String(LogLevels.DEBUG)]: "DEBUG",
   [String(LogLevels.INFO)]: "INFO",
+  [String(LogLevels.OK)]: "OK",
   [String(LogLevels.WARNING)]: "WARNING",
   [String(LogLevels.ERROR)]: "ERROR",
   [String(LogLevels.CRITICAL)]: "CRITICAL",
@@ -38,6 +40,8 @@ export function getLevelByName(name: LevelName): number {
       return LogLevels.DEBUG;
     case "INFO":
       return LogLevels.INFO;
+    case "OK":
+      return LogLevels.OK;
     case "WARNING":
       return LogLevels.WARNING;
     case "ERROR":

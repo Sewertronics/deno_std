@@ -112,6 +112,23 @@ export function info<T>(
   return getLogger("default").info(msg, ...args);
 }
 
+/** Log with ok level, using default logger. */
+export function ok<T>(msg: () => T, ...args: unknown[]): T | undefined;
+export function ok<T>(
+  msg: T extends GenericFunction ? never : T,
+  ...args: unknown[]
+): T;
+export function ok<T>(
+  msg: (T extends GenericFunction ? never : T) | (() => T),
+  ...args: unknown[]
+): T | undefined {
+  // Assist TS compiler with pass-through generic type
+  if (msg instanceof Function) {
+    return getLogger("default").ok(msg, ...args);
+  }
+  return getLogger("default").ok(msg, ...args);
+}
+
 /** Log with warning level, using default logger. */
 export function warning<T>(msg: () => T, ...args: unknown[]): T | undefined;
 export function warning<T>(

@@ -1,7 +1,7 @@
 // Copyright 2018-2021 the Deno authors. All rights reserved. MIT license.
 import { getLevelByName, LevelName, LogLevels } from "./levels.ts";
 import type { LogRecord } from "./logger.ts";
-import { blue, bold, red, yellow } from "../fmt/colors.ts";
+import { blue, bold, red, yellow, green, gray } from "../fmt/colors.ts";
 import { exists, existsSync } from "../fs/exists.ts";
 import { BufWriterSync } from "../io/buffer.ts";
 
@@ -59,8 +59,14 @@ export class ConsoleHandler extends BaseHandler {
     let msg = super.format(logRecord);
 
     switch (logRecord.level) {
+      case LogLevels.DEBUG:
+        msg = gray(msg);
+        break;
       case LogLevels.INFO:
         msg = blue(msg);
+        break;
+      case LogLevels.OK:
+        msg = green(msg);
         break;
       case LogLevels.WARNING:
         msg = yellow(msg);
